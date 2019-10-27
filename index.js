@@ -8,8 +8,9 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (msg) => {
+    let stop = true
     if (msg.content == '!stawp') {
-        return
+        stop = false
     }
     if (msg.content.substring(0, 1) == '!') {
         let commands = msg.content.split(" ")
@@ -20,12 +21,17 @@ bot.on('message', (msg) => {
         else {
             msg.reply('Checking the vibe first!')
             for (let i = 0; i < timesRepeated; i++) {
-                let reply = ''
-                for (let j = 0; j < commands.length - 1; j++) {
-                    reply += ' ' + commands[j] + ' '
+                if (stop) {
+                    break
                 }
-                reply = reply.replace(/!/g, '')
-                msg.reply(reply)
+                else {
+                    let reply = ''
+                    for (let j = 0; j < commands.length - 1; j++) {
+                        reply += ' ' + commands[j] + ' '
+                    }
+                    reply = reply.replace(/!/g, '')
+                    msg.reply(reply)
+                }
             }
         }
     }
