@@ -4,7 +4,7 @@ const auth = require('./auth.json')
 const bot = new discord.Client()
 
 bot.on('ready', () => {
-    console.log(`Memester ready to meme VIIIIIBEEEE CHECK`)
+    console.log(`Bot is live!`)
 })
 
 bot.on('message', (msg) => {
