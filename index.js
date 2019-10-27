@@ -22,6 +22,7 @@ bot.on('message', (msg) => {
             msg.reply('Checking the vibe first!')
             for (let i = 0; i < timesRepeated; i++) {
                 if (!stop) {
+                    msg.reply("I ain't about this vibe shit. Aborting")
                     break
                 }
                 else {
