@@ -1,0 +1,26 @@
+{
+  "name": "discord-bot",
+  "version": "1.0.0",
+  "description": "a degenerate bot for weebs",
+  "main": "index.js",
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "bad",
+    "awful",
+    "degenerate"
+  ],
+  "author": "ekinbukulmez",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1"
+  }
+}
