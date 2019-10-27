@@ -21,7 +21,7 @@ bot.on('message', (msg) => {
         else {
             msg.reply('Checking the vibe first!')
             for (let i = 0; i < timesRepeated; i++) {
-                if (stop) {
+                if (!stop) {
                     break
                 }
                 else {
