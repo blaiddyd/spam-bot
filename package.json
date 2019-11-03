@@ -20,7 +20,9 @@
   "author": "ekinbukulmez",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.0",
     "discord.js": "^11.5.1",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1"
   }
 }
