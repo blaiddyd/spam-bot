@@ -1,6 +1,5 @@
-const express = require('express')
+require('dotenv').config()
 const discord = require('discord.js')
-const auth = require('./auth.json')
 const bot = new discord.Client()
 const axios = require('axios')
 
@@ -15,15 +14,17 @@ bot.on('message', (msg) => {
         if (timesRepeated === NaN) {
             msg.reply('Invalid command :( Try something like !yeet 20')
         }
+        else if (timesRepeated > 100) {
+            msg.reply("Banana Doppio fact: I can't repeat the same message more than 100 times. Banana Doppio out.");
+        }
         else {
             msg.reply('Checking the vibe first!')
             for (let i = 0; i < timesRepeated; i++) {
                 let reply = ''
                 for (let j = 0; j < commands.length - 1; j++) {
-                    reply += ' ' + commands[j] + ' '
                 }
                 reply = reply.replace(/!/g, '')
-                msg.reply(reply)  
+                msg.reply(reply)
             }
         }
     }
@@ -35,21 +36,21 @@ bot.on('message', (msg) => {
             searchString += ' ' + seekCommand[i] + ' '
         }
 
-        axios.get(`https://www.googleapis.com/customsearch/v1?key=${auth.apiKey}&cx=012519355816500156971:pne8pbul53l&q=${searchString}`)
-        .then((res) => {
-            if (res.data.items.length > 0) {
-                msg.reply(res.data.items[Math.floor(Math.random()*res.data.items.length)].link)
-            }
-            else {
-                msg.reply(`Couldn't find anything for ${searchString}`)
-            }
-            
-        })
-        .catch((err) => {
-            msg.reply('Sorry! I done goofed while searching :(')
-        })
+        axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=012519355816500156971:pne8pbul53l&q=${searchString}`)
+            .then((res) => {
+                if (res.data.items.length > 0) {
+                    msg.reply(res.data.items[Math.floor(Math.random() * res.data.items.length)].link)
+                }
+                else {
+                    msg.reply(`Couldn't find anything for ${searchString}`)
+                }
+
+            })
+            .catch((err) => {
+                msg.reply('Sorry! I done goofed while searching :(')
+            })
 
     }
 })
 
-bot.login(auth.token)
+bot.login(process.env.AUTH_TOKEN);
