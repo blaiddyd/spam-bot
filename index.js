@@ -14,8 +14,8 @@ bot.on('message', (msg) => {
         if (timesRepeated === NaN) {
             msg.reply('Invalid command :( Try something like !yeet 20')
         }
-        else if (timesRepeated > 100) {
-            msg.reply("Banana Doppio fact: I can't repeat the same message more than 100 times. Banana Doppio out.");
+        else if (timesRepeated > 20) {
+            msg.reply("Banana Doppio fact: I can't repeat the same message more than 20 times. Banana Doppio out.");
         }
         else {
             msg.reply('Checking the vibe first!')
