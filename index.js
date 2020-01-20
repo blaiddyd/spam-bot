@@ -8,48 +8,68 @@ bot.on('ready', () => {
 })
 
 bot.on('message', (msg) => {
-    if (msg.content.substring(0, 1) == '!') {
-        let commands = msg.content.split(" ")
-        let timesRepeated = parseFloat(commands[commands.length - 1])
-        if (timesRepeated === NaN) {
-            msg.reply('Invalid command :( Try something like !yeet 20')
-        }
-        else if (timesRepeated > 20) {
-            msg.reply("Banana Doppio fact: I can't repeat the same message more than 20 times. Banana Doppio out.");
-        }
-        else {
-            msg.reply('Checking the vibe first!')
-            for (let i = 0; i < timesRepeated; i++) {
-                let reply = ''
-                for (let j = 0; j < commands.length - 1; j++) {
-                }
-                reply = reply.replace(/!/g, '')
-                msg.reply(reply)
+    switch (msg.content.substring(0, 1)) {
+        case '!':
+            let commands = msg.content.split(" ")
+            let timesRepeated = parseFloat(commands[commands.length - 1])
+            if (timesRepeated === NaN) {
+                msg.reply('Invalid command :( Try something like !yeet 20')
             }
-        }
-    }
-    else if (msg.content.substring(0, 1) == ':') {
-        msg.react('🤙')
-        let seekCommand = msg.content.split(" ")
-        let searchString = ''
-        for (let i = 0; i < seekCommand.length; i++) {
-            searchString += ' ' + seekCommand[i] + ' '
-        }
-
-        axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=012519355816500156971:pne8pbul53l&q=${searchString}`)
-            .then((res) => {
-                if (res.data.items.length > 0) {
-                    msg.reply(res.data.items[Math.floor(Math.random() * res.data.items.length)].link)
+            else if (timesRepeated > 20) {
+                msg.reply("Banana Doppio fact: I can't repeat the same message more than 20 times. Banana Doppio out.");
+            }
+            else {
+                msg.reply('Checking the vibe first!')
+                for (let i = 0; i < timesRepeated; i++) {
+                    let reply = ''
+                    for (let j = 0; j < commands.length - 1; j++) {
+                    }
+                    reply = reply.replace(/!/g, '')
+                    msg.reply(reply)
                 }
-                else {
-                    msg.reply(`Couldn't find anything for ${searchString}`)
-                }
+            }
+        case ':':
+            msg.react('🤙')
+            let seekCommand = msg.content.split(" ")
+            let searchString = ''
+            for (let i = 0; i < seekCommand.length; i++) {
+                searchString += ' ' + seekCommand[i] + ' '
+            }
 
-            })
-            .catch((err) => {
-                msg.reply('Sorry! I done goofed while searching :(')
-            })
+            axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=012519355816500156971:pne8pbul53l&q=${searchString}`)
+                .then((res) => {
+                    if (res.data.items.length > 0) {
+                        msg.reply(res.data.items[Math.floor(Math.random() * res.data.items.length)].link)
+                    }
+                    else {
+                        msg.reply(`Couldn't find anything for ${searchString} :'(`)
+                    }
 
+                })
+                .catch(() => {
+                    msg.reply('Sorry! I done goofed while searching :(')
+                })
+        case '~':
+            msg.react('🍆')
+            const sexyCommand = msg.content.split(" ")
+            let sexySearch = ''
+            for (let i = 0; i < sexyCommand.length; i++) {
+                sexySearch += ' ' + sexyCommand[i] + ' '
+            }
+
+            axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=012519355816500156971:i348royw1z4&q=${sexySearch}`)
+                .then((res) => {
+                    console.log(res.data);
+                    if (res.data.items.length > 0) {
+                        msg.reply(res.data.items[Math.floor(Math.random() * res.data.items.length)].link)
+                    } else {
+                        msg.reply(`Couldn't find any degeneracy for ${sexySearch} UwU`)
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    msg.reply('Sorry! I done goofed while searching :(')
+                })
     }
 })
 
