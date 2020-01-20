@@ -59,7 +59,6 @@ bot.on('message', (msg) => {
 
             axios.get(`https://www.googleapis.com/customsearch/v1?key=${process.env.API_KEY}&cx=012519355816500156971:i348royw1z4&q=${sexySearch}`)
                 .then((res) => {
-                    console.log(res.data);
                     if (res.data.items.length > 0) {
                         msg.reply(res.data.items[Math.floor(Math.random() * res.data.items.length)].link)
                     } else {
