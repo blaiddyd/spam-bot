@@ -3,8 +3,6 @@ const discord = require('discord.js')
 const bot = new discord.Client()
 const axios = require('axios')
 
-const axios = require("axios");
-
 const allBoards = [
     "a",
     "c",
@@ -57,18 +55,18 @@ const allBoards = [
 const excludedBoards = ["f"];
 
 const animeBoards = [
-"a",
-"c",
-"w",
-"m",
-"cgl",
-"cm",
-"jp",
-"h",
-"e",
-"u",
-"d",
-"y"
+    "a",
+    "c",
+    "w",
+    "m",
+    "cgl",
+    "cm",
+    "jp",
+    "h",
+    "e",
+    "u",
+    "d",
+    "y"
 ];
 
 const focussedAnimeBoards = ["h", "e", "u", "d", "y"];
@@ -187,7 +185,7 @@ bot.on('message', (msg) => {
                         `Wow kawaii japanese here imouto isekai!\n 
                         Use weeb, extraweeb, other, misc, porn, or lucky.`)
             }
-            
+
             axios
                 .get(`http://boards.4chan.org/${selectedBoard}/catalog`)
                 .then(res => {
@@ -201,17 +199,17 @@ bot.on('message', (msg) => {
                             // const randImg = allImagesOnThread[rand];
                             const randImg = allImagesOnThread[0];
                             msg.reply(`http://i.4cdn.org/${selectedBoard}/${randImg}`);
-                    })
-                    .catch(err => {
-                        console.log("Here 1 " + err);
-                        msg.reply("Jesus, FFS! What is wrong with you?!")
-                    });
+                        })
+                        .catch(err => {
+                            console.log("Here 1 " + err);
+                            msg.reply("Jesus, FFS! What is wrong with you?!")
+                        });
                 })
                 .catch(err => {
                     console.log("Here 2 " + err);
                     msg.reply("How did you fail at such a SIMPLE thing?!")
-              });
-            
+                });
+
     }
 })
 
