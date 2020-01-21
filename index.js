@@ -3,6 +3,94 @@ const discord = require('discord.js')
 const bot = new discord.Client()
 const axios = require('axios')
 
+const axios = require("axios");
+
+const allBoards = [
+    "a",
+    "c",
+    "w",
+    "m",
+    "cgl",
+    "cm",
+    "n",
+    "jp",
+    "v",
+    "vg",
+    "vp",
+    "vr",
+    "co",
+    "g",
+    "tv",
+    "k",
+    "an",
+    "tg",
+    "sp",
+    "asp",
+    "sci",
+    "his",
+    "int",
+    "out",
+    "toy",
+    "po",
+    "p",
+    "ck",
+    "lit",
+    "mu",
+    "fa",
+    "3",
+    "gd",
+    "diy",
+    "wsg",
+    "qst",
+    "biz",
+    "trv",
+    "fit",
+    "x",
+    "adv",
+    "lgbt",
+    "mlp",
+    "news",
+    "wsr",
+    "vip"
+];
+
+const excludedBoards = ["f"];
+
+const animeBoards = [
+"a",
+"c",
+"w",
+"m",
+"cgl",
+"cm",
+"jp",
+"h",
+"e",
+"u",
+"d",
+"y"
+];
+
+const focussedAnimeBoards = ["h", "e", "u", "d", "y"];
+
+const otherBoards = ["x", "lgbt", "mlp", "news"];
+
+const miscBoards = ["b", "r9k", "pol", "bant", "soc", "s4s"];
+
+const pornBoards = ["s", "hc", "hm", "hr", "gif", "aco", "r"];
+
+const getRandomInt = max => {
+    return Math.floor(Math.random() * max);
+};
+
+const getThreads = html => {
+    return [...html.matchAll(/"(\d{7,8})":/gm)].map(url => url[1]);
+};
+
+const getImages = html => {
+    return [...html.matchAll(/\/(\d*\w.jpg)/gm)].map(url => url[1]);
+};
+
 bot.on('ready', () => {
     console.log(`Bot is live!`)
 })
@@ -69,6 +157,61 @@ bot.on('message', (msg) => {
                     console.log(err);
                     msg.reply('Sorry! I done goofed while searching :(')
                 })
+        case '#':
+            msg.react('🌭')
+
+            const FoChanCommand = msg.content.split(" ")[0]
+
+            let selectedBoard;
+            switch (FoChanCommand.toLowerCase()) {
+                case "weeb":
+                    selectedBoard = animeBoards[getRandomInt(animeBoards.length - 1)];
+                    break;
+                case "extraweeb":
+                    selectedBoard = focussedAnimeBoards[getRandomInt(focussedAnimeBoards.length - 1)];
+                    break;
+                case "other":
+                    selectedBoard = otherBoards[getRandomInt(otherBoards.length - 1)];
+                    break;
+                case "misc":
+                    selectedBoard = miscBoards[getRandomInt(miscBoards.length - 1)];
+                    break;
+                case "porn":
+                    selectedBoard = pornBoards[getRandomInt(pornBoards.length - 1)];
+                    break;
+                case "lucky":
+                    selectedBoard = allBoards[getRandomInt(allBoards.length - 1)];
+                    break;
+                default:
+                    msg.reply(
+                        `Wow kawaii japanese here imouto isekai!\n 
+                        Use weeb, extraweeb, other, misc, porn, or lucky.`)
+            }
+            
+            axios
+                .get(`http://boards.4chan.org/${selectedBoard}/catalog`)
+                .then(res => {
+                    const allThread = getThreads(res.data);
+                    const randThread = allThread[getRandomInt(allThread.length - 1)];
+                    axios
+                        .get(`https://boards.4chan.org/${selectedBoard}/thread/${randThread}`)
+                        .then(res => {
+                            const allImagesOnThread = getImages(res.data);
+                            const rand = getRandomInt(allImagesOnThread.length);
+                            // const randImg = allImagesOnThread[rand];
+                            const randImg = allImagesOnThread[0];
+                            msg.reply(`http://i.4cdn.org/${selectedBoard}/${randImg}`);
+                    })
+                    .catch(err => {
+                        console.log("Here 1 " + err);
+                        msg.reply("Jesus, FFS! What is wrong with you?!")
+                    });
+                })
+                .catch(err => {
+                    console.log("Here 2 " + err);
+                    msg.reply("How did you fail at such a SIMPLE thing?!")
+              });
+            
     }
 })
 
