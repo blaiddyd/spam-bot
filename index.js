@@ -60,6 +60,7 @@ bot.on("message", msg => {
                     msg.reply(reply)
                 }
             }
+            break
         case ":":
             msg.react("🤙")
             let seekCommand = msg.content.split(" ")
@@ -84,6 +85,7 @@ bot.on("message", msg => {
                 .catch(() => {
                     msg.reply("Sorry! I done goofed while searching :(")
                 })
+            break
         case "~":
             msg.react("🍆")
             const sexyCommand = msg.content.split(" ")
@@ -109,7 +111,8 @@ bot.on("message", msg => {
                     console.log(err)
                     msg.reply("Sorry! I done goofed while searching :(")
                 })
-        case "#":
+            break
+        case "4":
             msg.react("🌭")
 
             const FoChanCommand = msg.content.split(" ")[0]
@@ -136,10 +139,7 @@ bot.on("message", msg => {
                     selectedBoard = allBoards[getRandomInt(allBoards.length - 1)]
                     break
                 default:
-                    msg.reply(
-                        `Wow kawaii japanese here imouto isekai!\n 
-                        Use weeb, extraweeb, other, misc, porn, or lucky.`
-                    )
+                    msg.reply(`Use 4weeb, 4extraweeb, 4other, 4misc, 4porn, or 4lucky.`)
             }
 
             axios
@@ -151,20 +151,21 @@ bot.on("message", msg => {
                         .get(`https://boards.4chan.org/${selectedBoard}/thread/${randThread}`)
                         .then(res => {
                             const allImagesOnThread = getImages(res.data)
-                            const rand = getRandomInt(allImagesOnThread.length)
+                            // const rand = getRandomInt(allImagesOnThread.length)
                             // const randImg = allImagesOnThread[rand];
                             const randImg = allImagesOnThread[0]
                             msg.reply(`http://i.4cdn.org/${selectedBoard}/${randImg}`)
                         })
                         .catch(err => {
                             console.log("Here 1 " + err)
-                            msg.reply("Jesus, FFS! What is wrong with you?!")
+                            msg.reply("Oooh wee something fucked up")
                         })
                 })
                 .catch(err => {
                     console.log("Here 2 " + err)
-                    msg.reply("How did you fail at such a SIMPLE thing?!")
+                    msg.reply("Awww jeez")
                 })
+            break
     }
 })
 
