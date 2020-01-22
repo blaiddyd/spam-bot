@@ -196,7 +196,6 @@ bot.on('message', (msg) => {
                         .then(res => {
                             const allImagesOnThread = getImages(res.data);
                             const rand = getRandomInt(allImagesOnThread.length);
-                            // const randImg = allImagesOnThread[rand];
                             const randImg = allImagesOnThread[0];
                             msg.reply(`http://i.4cdn.org/${selectedBoard}/${randImg}`);
                         })
