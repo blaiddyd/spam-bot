@@ -29,12 +29,10 @@ const getRandomInt = max => {
 }
 
 const getThreads = html => {
-    console.log(...html.matchAll(/"(\d{7,8})":/gm))
     return [...html.matchAll(/"(\d{7,8})":/gm)].map(url => url[1])
 }
 
 const getImages = html => {
-    console.log(...html.matchAll(/\/(\d*\w.jpg)/gm))
     return [...html.matchAll(/\/(\d*\w.jpg)/gm)].map(url => url[1])
 }
 
@@ -150,6 +148,7 @@ bot.on("message", msg => {
             axios
                 .get(`http://boards.4chan.org/${selectedBoard}/catalog`)
                 .then(res => {
+                    console.log(res)
                     const allThread = getThreads(res.data)
                     const randThread = allThread[getRandomInt(allThread.length - 1)]
                     axios
