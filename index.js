@@ -34,6 +34,7 @@ const getThreads = html => {
 }
 
 const getImages = html => {
+    console.log([...html.matchAll(/\/(\d*\w.jpg)/gm))
     return [...html.matchAll(/\/(\d*\w.jpg)/gm)].map(url => url[1])
 }
 
