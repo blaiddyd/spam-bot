@@ -148,12 +148,14 @@ bot.on("message", msg => {
             axios
                 .get(`http://boards.4chan.org/${selectedBoard}/catalog`)
                 .then(res => {
-                    console.log(res)
+                    console.log(typeof res)
                     const allThread = getThreads(res.data)
                     const randThread = allThread[getRandomInt(allThread.length - 1)]
                     axios
                         .get(`https://boards.4chan.org/${selectedBoard}/thread/${randThread}`)
                         .then(res => {
+                            console.log(res)
+                            console.log("hrere")
                             const allImagesOnThread = getImages(res.data)
                             // const rand = getRandomInt(allImagesOnThread.length)
                             // const randImg = allImagesOnThread[rand];
