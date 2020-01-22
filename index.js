@@ -29,11 +29,13 @@ const getRandomInt = max => {
 }
 
 const getThreads = html => {
-    return [...html.matchAll(/"(\d{7,8})":/gm)].map(url => url[1])
+    const result = [...html.matchAll(/"(\d{7,8})":/gm)][1]
+    return result
 }
 
 const getImages = html => {
-    return [...html.matchAll(/\/(\d*\w.jpg)/gm)].map(url => url[1])
+    const result = [...html.matchAll(/\/(\d*\w.jpg)/gm)][1]
+    return result
 }
 
 bot.on("ready", () => {
@@ -112,7 +114,7 @@ bot.on("message", msg => {
                     msg.reply("Sorry! I done goofed while searching :(")
                 })
             break
-        case "=":
+        case "4":
             msg.react("🌭")
 
             const FoChanCommand = msg.content.split(" ")[0]
@@ -147,6 +149,7 @@ bot.on("message", msg => {
                 .get(`http://boards.4chan.org/${selectedBoard}/catalog`)
                 .then(res => {
                     const allThread = getThreads(res.data)
+                    console.log(res.data)
                     const randThread = allThread[getRandomInt(allThread.length - 1)]
                     axios
                         .get(`https://boards.4chan.org/${selectedBoard}/thread/${randThread}`)
@@ -162,7 +165,6 @@ bot.on("message", msg => {
                 })
                 .catch(err => {
                     console.log("Here 2 " + err)
-                    msg.reply("Awww jeez")
                 })
             break
     }
