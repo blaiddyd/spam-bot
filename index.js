@@ -121,23 +121,23 @@ bot.on("message", msg => {
 
             let selectedBoard
             switch (FoChanCommand.toLowerCase()) {
-                case "weeb":
+                case "4weeb":
                     selectedBoard = animeBoards[getRandomInt(animeBoards.length - 1)]
                     break
-                case "extraweeb":
+                case "4extraweeb":
                     selectedBoard =
                         focussedAnimeBoards[getRandomInt(focussedAnimeBoards.length - 1)]
                     break
-                case "other":
+                case "4other":
                     selectedBoard = otherBoards[getRandomInt(otherBoards.length - 1)]
                     break
-                case "misc":
+                case "4misc":
                     selectedBoard = miscBoards[getRandomInt(miscBoards.length - 1)]
                     break
-                case "porn":
+                case "4porn":
                     selectedBoard = pornBoards[getRandomInt(pornBoards.length - 1)]
                     break
-                case "lucky":
+                case "4lucky":
                     selectedBoard = allBoards[getRandomInt(allBoards.length - 1)]
                     break
                 default:
