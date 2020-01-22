@@ -29,6 +29,7 @@ const getRandomInt = max => {
 }
 
 const getThreads = html => {
+    console.log(...html.matchAll(/"(\d{7,8})":/gm))
     return [...html.matchAll(/"(\d{7,8})":/gm)].map(url => url[1])
 }
 
@@ -142,6 +143,7 @@ bot.on("message", msg => {
                     break
                 default:
                     msg.reply(`Use 4weeb, 4extraweeb, 4other, 4misc, 4porn, or 4lucky.`)
+                    return
             }
 
             axios
