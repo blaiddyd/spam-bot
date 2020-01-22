@@ -117,6 +117,8 @@ bot.on("message", msg => {
 
             const FoChanCommand = msg.content.split(" ")[0]
 
+            console.log(FoChanCommand)
+
             let selectedBoard
             switch (FoChanCommand.toLowerCase()) {
                 case "weeb":
@@ -169,5 +171,4 @@ bot.on("message", msg => {
     }
 })
 
-console.log(process.env.AUTH_TOKEN)
 bot.login(process.env.AUTH_TOKEN)
