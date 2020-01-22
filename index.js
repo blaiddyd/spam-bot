@@ -29,6 +29,8 @@ const getRandomInt = max => {
 }
 
 const getThreads = html => {
+    console.log(html)
+    console.log("hereerer")
     return [...html.matchAll(/"(\d{7,8})":/gm)].map(url => url[1])
 }
 
